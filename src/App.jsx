@@ -1,4 +1,4 @@
-import "./App.css";
+import styles from "./App.module.css";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Card } from "./components/Card";
 import { Score } from "./components/Score";
@@ -71,14 +71,16 @@ const App = () => {
   };
 
   return (
-    <div className="main">
+    <div className={styles.main}>
       <Score nowScore={score} bestScore={bestScore.current} />
-      <div className="cards__contain">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          data.map((el) => <Card key={el.id} data={el} clickFunc={() => handleClik(el.id)} />)
-        )}
+      <div className={styles.cards}>
+        <div className={styles.cards__contain}>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            data.map((el) => <Card key={el.id} data={el} clickFunc={() => handleClik(el.id)} />)
+          )}
+        </div>
       </div>
     </div>
   );
