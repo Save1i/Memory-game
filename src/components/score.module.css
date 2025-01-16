@@ -1,0 +1,40 @@
+.score {
+  width: 1128px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.score__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.text {
+  font-size: 18px;
+  font-weight: 500px;
+}
+.score__container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.score__now {
+  font-size: 30px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.score__best {
+  font-size: 30px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

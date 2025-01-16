@@ -1,0 +1,23 @@
+h2,
+p {
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  background-color: #ccfbf1;
+  width: 250px;
+  transition: all 0.1s ease;
+  border-radius: 10px;
+}
+
+.card:hover {
+  background-color: #99f6e4;
+}
+
+.card__img {
+  width: 200px;
+}
