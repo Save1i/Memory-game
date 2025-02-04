@@ -1,40 +1,52 @@
 .score {
-  width: 1128px;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 1000px;
+  margin: 5px auto 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 10px;
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  background-color: #e8f5e9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .score__title {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
 }
 
 .title {
   font-size: 30px;
   font-weight: 600;
+  color: #2e7d32;
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .text {
   font-size: 18px;
-  font-weight: 500px;
+  font-weight: 500;
+  color: #388e3c;
 }
+
 .score__container {
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: center;
+  gap: 5px;
 }
-.score__now {
-  font-size: 30px;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
+
+.score__now,
 .score__best {
   font-size: 30px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  color: #1b5e20;
+  padding: 5px 10px;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  background-color: #c8e6c9;
 }
