@@ -14,7 +14,13 @@ p {
   border-radius: 10px;
 }
 
-.card:hover {
+@media (pointer: coarse) {
+  .card:hover {
+    background-color: #99f6e4;
+  }
+}
+
+.card:active {
   background-color: #99f6e4;
 }
 
