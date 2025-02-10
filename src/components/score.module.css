@@ -1,6 +1,9 @@
 .score {
-  width: 1000px;
-  margin: 5px auto 20px;
+  max-width: 1000px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: space-around;
   padding: 10px;
@@ -49,4 +52,45 @@
   border: 1px solid #4caf50;
   border-radius: 8px;
   background-color: #c8e6c9;
+}
+
+@media (max-width: 833px) {
+  .score__best,
+  .score__now {
+    font-size: 22px;
+  }
+
+  .score {
+    gap: 30px;
+  }
+
+  .score__container {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 833px) {
+  .score {
+    flex-direction: column;
+  }
+  .text {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .score__best,
+  .score__now {
+    font-size: 16px;
+  }
+
+  .score {
+    gap: 15px;
+  }
+
+  .score__container {
+    min-width: 120px;
+  }
 }

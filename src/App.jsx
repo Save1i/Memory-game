@@ -1,7 +1,9 @@
 import styles from "./App.module.css";
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useContext } from "react";
 import { Card } from "./components/Card";
 import { Score } from "./components/Score";
+import { Levels } from "./components/Levels";
+import { LevelContext } from "./components/LevelContext";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -12,20 +14,27 @@ const App = () => {
   const [score, setScore] = useState(0);
   const bestScore = useRef(0);
 
+  const { level } = useContext(LevelContext);
+
   const randNum = useCallback(() => {
+    if (numArr.current.length >= level) {
+      return null;
+    }
+
     let id;
     do {
-      id = Math.floor(Math.random() * 6) + 1;
-    } while (numArr.current.includes(id) && numArr.current.length < 6);
+      id = Math.floor(Math.random() * level) + 1;
+    } while (numArr.current.includes(id));
+
     numArr.current.push(id);
     return id;
-  }, []);
+  }, [level]);
 
   useEffect(() => {
     const fetchData = async () => {
       const tempData = [];
 
-      while (tempData.length < 6) {
+      while (tempData.length < level) {
         const id = randNum();
 
         if (id === null) break;
@@ -44,7 +53,7 @@ const App = () => {
     };
 
     fetchData();
-  }, [randNum, clickState]);
+  }, [randNum, clickState, level]);
 
   function setBestScore() {
     if (clickArr.current.length > bestScore.current) {
@@ -70,9 +79,12 @@ const App = () => {
     console.log(numArr);
   };
 
+  if (level === 0) return <Levels />;
+
   return (
     <div className={styles.main}>
       <Score nowScore={score} bestScore={bestScore.current} />
+
       <div className={styles.cards}>
         <div className={styles.cards__contain}>
           {loading ? (
