@@ -15,6 +15,13 @@ p {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
+.card {
+  user-select: none; /* Отключает выделение текста */
+  -webkit-user-select: none; /* Для Safari */
+  -moz-user-select: none; /* Для Firefox */
+  -ms-user-select: none; /* Для старых версий IE */
+}
+
 @media (pointer: coarse) {
   .card:hover {
     background-color: #81c784;

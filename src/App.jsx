@@ -8,11 +8,11 @@ import { LevelContext } from "./components/LevelContext";
 const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const numArr = useRef([]);
-  const clickArr = useRef([]);
-  const [clickState, setClickState] = useState(null);
+  const numArr = useRef(new Set());
+  const clickArr = useRef(new Set());
   const [score, setScore] = useState(0);
   const bestScore = useRef(0);
+  const [load, setLoad] = useState(true);
 
   const { level } = useContext(LevelContext);
 
@@ -22,61 +22,66 @@ const App = () => {
     }
 
     let id;
+
     do {
       id = Math.floor(Math.random() * level) + 1;
-    } while (numArr.current.includes(id));
+    } while (numArr.current.has(id));
 
-    numArr.current.push(id);
+    numArr.current.add(id);
     return id;
   }, [level]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const tempData = [];
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    const tempData = [];
 
-      while (tempData.length < level) {
-        const id = randNum();
+    numArr.current.clear(); // отчистка
 
-        if (id === null) break;
-        try {
-          const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-          if (!response.ok) throw new Error("Failed to fetch");
-          const result = await response.json();
-          tempData.push(result);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-          break;
-        }
+    while (tempData.length < level) {
+      const id = randNum();
+
+      if (id === null) break;
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch");
+        const result = await response.json();
+        tempData.push(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        break;
       }
-      setData(tempData);
-      setLoading(false);
-    };
+    }
+    setTimeout(() => {
+      setLoad(false);
+    }, 500);
 
+    setData(tempData);
+    setLoading(false);
+  }, [randNum, level]);
+
+  useEffect(() => {
     fetchData();
-  }, [randNum, clickState, level]);
+  }, [fetchData]);
 
   function setBestScore() {
-    if (clickArr.current.length > bestScore.current) {
-      bestScore.current = clickArr.current.length;
+    if (clickArr.current.size > bestScore.current) {
+      bestScore.current = clickArr.current.size;
     }
   }
 
   const handleClik = (id) => {
-    if (!clickArr.current.includes(id)) {
-      clickArr.current.push(id);
-      numArr.current = [];
-      setClickState(id);
-      setScore(clickArr.current.length);
+    if (!clickArr.current.has(id) && !load) {
+      clickArr.current.add(id);
+      setScore(clickArr.current.size);
+      setLoad(true);
     } else {
       setBestScore();
-      numArr.current = [];
-      setClickState(id + 1);
       setScore(0);
-      clickArr.current = [];
+      clickArr.current.clear();
     }
 
-    console.log(clickArr);
-    console.log(numArr);
+    setLoad(true);
+    fetchData();
   };
 
   if (level === 0) return <Levels />;
