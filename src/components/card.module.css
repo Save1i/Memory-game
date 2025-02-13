@@ -16,10 +16,11 @@ p {
 }
 
 .card {
-  user-select: none; /* Отключает выделение текста */
-  -webkit-user-select: none; /* Для Safari */
-  -moz-user-select: none; /* Для Firefox */
-  -ms-user-select: none; /* Для старых версий IE */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  padding: 20px;
 }
 
 @media (pointer: coarse) {

@@ -16,7 +16,7 @@ export const Levels = () => {
   return (
     <div className={styles.levels}>
       <div className={styles.levels__inner}>
-        <h2 className={styles.levels__title}>Выберите уровень</h2>
+        <h2 className={styles.levels__title}>Choose a level</h2>
         <button className={styles.levels__btn} onClick={() => handleSelect(6)}>
           Easily
         </button>
