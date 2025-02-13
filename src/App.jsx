@@ -93,7 +93,7 @@ const App = () => {
       <div className={styles.cards}>
         <div className={styles.cards__contain}>
           {loading ? (
-            <p>Loading...</p>
+            <p className={styles.load}>Loading...</p>
           ) : (
             data.map((el) => <Card key={el.id} data={el} clickFunc={() => handleClik(el.id)} />)
           )}
