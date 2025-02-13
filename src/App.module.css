@@ -10,6 +10,17 @@
   pointer-events: none;
 }
 
+.load {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.2;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
